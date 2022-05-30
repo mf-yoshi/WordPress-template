@@ -61,7 +61,14 @@ spec:
         volumeMounts:
         - name: wordpress-persistent-storage
           mountPath: /var/www/html
+        - mountPath: /usr/local/etc/php/conf.d/uploads.ini
+          name: php-config
+          subPath: uploads.ini
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
           claimName: wp-pv-claim
+      - configMap:
+          defaultMode: 420
+          name: wp-php-config
+        name: php-config
