@@ -60,6 +60,13 @@ spec:
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - sh
+                - -c
+                - "rm -fr /var/lib/mysql/*"
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
